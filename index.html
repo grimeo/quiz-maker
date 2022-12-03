@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Maker</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="scripts/main.js" defer></script>
+</head>
+<body>
+
+    <div id="edit-gui">
+        <h2>edit</h2>
+        <textarea id="edit-textarea"></textarea>
+        <button id="cancel-edit-btn">Cancel</button>
+        <button id="save-edit-btn">Save</button>
+        <span id="question-to-edit-id"></span>
+    </div>
+
+    <div id="main-container">
+        <h1>Quiz Maker</h1>
+        <div class="quiz-generator-container">
+
+        </div>
+        <p id='err-question-input'></p>
+
+        <textarea id="question-input" ></textarea>
+        
+        <div id="choice-container">
+
+            <h3>choices</h3>
+            <button id="multiple-btn">multiple choice</button>
+            <button id="t-or-f-btn">true or false</button>
+
+            <div id="multiple-choice-section">
+                <input type="text" name="" id="a1"/>
+                <input type="text" name="" id="a2"/>
+                <input type="text" name="" id="a3"/>
+                <input type="text" name="" id="a4"/>
+                <br>
+                <label for="mult-correct-ans">Correct Answer: </label>
+                <input type="text" name="correct-answer" id="mult-correct-ans">
+            </div>
+            <div id="t-or-f-selection">
+                
+                <input type="radio" name="t-or-f" id="ans-true" value="True"><label for="ans-true">True</label>
+                
+                <input type="radio" name="t-or-f" id="ans-false" value="False"><label for="ans-false">False</label>
+            </div>
+        </div>
+        <button id="add-btn">Add Question</button>
+    
+
+        <div id="question-container">
+        </div>
+    </div>
+    
+</body>
+</html>
