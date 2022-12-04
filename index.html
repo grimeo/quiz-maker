@@ -13,6 +13,20 @@
     <div id="edit-gui">
         <h2>edit</h2>
         <textarea id="edit-textarea"></textarea>
+        <input type="text" name="" id="edit-a1"/>
+        <input type="text" name="" id="edit-a2"/>
+        <input type="text" name="" id="edit-a3"/>
+        <input type="text" name="" id="edit-a4"/>
+
+        <label for="mult-correct-ans">Correct Answer: </label>
+        <input type="text" name="correct-answer" id="edit-mult-correct-ans">
+
+        <input type="radio" name="t-or-f" id="edit-ans-true" value="True">
+        <label for="ans-true">True</label>
+                
+        <input type="radio" name="t-or-f" id="edit-ans-false" value="False">
+        <label for="ans-false">False</label>
+
         <button id="cancel-edit-btn">Cancel</button>
         <button id="save-edit-btn">Save</button>
         <span id="question-to-edit-id"></span>
@@ -44,15 +58,17 @@
             </div>
             <div id="t-or-f-selection">
                 
-                <input type="radio" name="t-or-f" id="ans-true" value="True"><label for="ans-true">True</label>
+                <input type="radio" name="t-or-f" id="ans-true" value="True">
+                <label for="ans-true">True</label>
                 
-                <input type="radio" name="t-or-f" id="ans-false" value="False"><label for="ans-false">False</label>
+                <input type="radio" name="t-or-f" id="ans-false" value="False">
+                <label for="ans-false">False</label>
             </div>
         </div>
         <button id="add-btn">Add Question</button>
     
 
-        <div id="question-container">
+        <div id="questions-container">
         </div>
     </div>
     

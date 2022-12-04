@@ -59,17 +59,24 @@ let choice_selection = '';
 
 
 
-let addQuestion = () => {
+let addQuestionAndChoices = () => {
+    let questions_container = document.getElementById('questions-container');
+
     let new_question_wrapper = document.createElement('div');
+
     let new_p = document.createElement('p');
-    let new_edit_btn = document.createElement('button')
-    let new_delete_btn = document.createElement('button')
+
     let new_question = document.getElementById('question-input');
-    let questions_container = document.getElementById('question-container');
+    let question_container = document.getElementById('question-container')
     let err_question_input = document.getElementById('err-question-input');
 
+    let new_choices_container = document.createElement('div')
+
+    let new_edit_btn = document.createElement('button')
+    let new_delete_btn = document.createElement('button')
+
     err_question_input.innerHTML='';
-    
+    // temporary condition for buggy enter 
     if(/^\s*$/g.test(new_question.value) || new_question.value.indexOf('\n') != -1){
          err_question_input.innerHTML = 'please type your question.'
     } else if(choice_selection==''){
@@ -82,10 +89,39 @@ let addQuestion = () => {
         new_question_wrapper.setAttribute('id', 'question-container-'+ number_of_question)
         questions_container.appendChild(new_question_wrapper)
 
-        new_p.innerHTML = new_question.value;
+        new_p.innerHTML = q_and_a[number_of_question-1][0];
         new_p.setAttribute('class', 'question')
         new_p.setAttribute('id', 'question-'+ number_of_question)
         new_question_wrapper.appendChild(new_p)
+
+        
+        new_choices_container.setAttribute('class', 'choices-container')
+        new_choices_container.setAttribute('id','choices-container-'+number_of_question)
+        new_question_wrapper.appendChild(new_choices_container)
+
+        //console.log(q_and_a[number_of_question-1].length)
+        if(q_and_a[number_of_question-1].length == 6){
+
+            for(let i = 0; i < 4; i++){
+                let choice = document.createElement('div')
+                choice.setAttribute('class', 'choices')
+                choice.setAttribute('id', 'choice-'+ number_of_question + '-' + (i+1))
+                choice.innerHTML = q_and_a [number_of_question-1][i+1]
+                new_choices_container.appendChild(choice)
+                new_question_wrapper.appendChild(new_choices_container)
+            }
+        }
+
+        if(q_and_a[number_of_question-1].length == 4){
+            for(let i = 0; i < 2; i++){
+                let choice = document.createElement('div')
+                choice.setAttribute('class', 'choices')
+                choice.setAttribute('id', 'choice-'+ number_of_question + '-' + (i+1))
+                choice.innerHTML = q_and_a [number_of_question-1][i+1]
+                new_choices_container.appendChild(choice)
+                new_question_wrapper.appendChild(new_choices_container)
+            }
+        }
 
         new_edit_btn.innerHTML = 'Edit';
         new_edit_btn.setAttribute('class', 'btn')
@@ -101,34 +137,75 @@ let addQuestion = () => {
         //new_delete_btn.setAttribute('onclick', deleteQuestion())
         //new_delete_btn.onclick = function () {deleteQuestion()}
         new_question_wrapper.appendChild(new_delete_btn)
-        question_container.appendChild(new_question_wrapper)
 
+// ============= clear() ================
         question_input.value = '';  
         choice_selection = '';
+
+        document.getElementById('a1').value = ''
+        document.getElementById('a2').value = ''
+        document.getElementById('a3').value = ''
+        document.getElementById('a4').value = ''
+        document.getElementById('mult-correct-ans').value = ''
+
+        multiple_choice_selection.style.display = 'none'
+        t_or_f_selection.style.display = 'none'
+// ============= /clear() ================
+
     }
 }   
 
-let addAnswer = () => {
-    
-}
 
 //===========edit gui====================
 let editQuestion = (n) => {
+
+    let mult_a1 = document.getElementById('edit-a1')
+    let mult_a2 = document.getElementById('edit-a2')
+    let mult_a3 = document.getElementById('edit-a3')
+    let mult_a4 = document.getElementById('edit-a4')
+    let mult_right_ans = document.getElementById('edit-mult-correct-ans')
+
     edit_gui.style.display = "block"
+
+    //multo nanaman 
+    //mult_a1.value = q_and_a[n-1][1];
+    //console.log(q_and_a[n-1].length);
+    console.log(q_and_a[n-1].length)
+    if(q_and_a[n-1].length == 6){
+        mult_a1.value = q_and_a[n-1][1];
+        mult_a2.value = q_and_a[n-1][2];
+        mult_a3.value = q_and_a[n-1][3];
+        mult_a4.value = q_and_a[n-1][4];
+        mult_right_ans.value = q_and_a[n-1][5]
+        
+    }
+    if(q_and_a[n-1].length == 4){
+        
+    }
 
     let questions = document.getElementById('question-'+n);
     let question_id = document.getElementById('question-to-edit-id')
 
     edit_textarea.innerHTML = questions.innerHTML;
+
     question_id.innerHTML = n;
-    
+
     save_edit_btn.setAttribute('onclick', 'saveEditedQuestion('+n+')')
+
+    
 }
 
 let deleteQuestion = (n) => {
     let question = document.getElementById('question-container-'+ n);
     question.remove();
     edit_gui.style.display = "none"
+
+    // ========== clearing operation sa edit window ==========
+    mult_a1.value =''
+    mult_a2.value = ''
+    mult_a3.value = ''
+    mult_a4.value = ''
+    mult_right_ans.value = ''
 }
 
 let saveEditedQuestion = () => {
@@ -138,16 +215,22 @@ let saveEditedQuestion = () => {
     question.innerHTML = edit_textarea.value 
 
     edit_gui.style.display = "none"
+
+    // ========== clearing operation sa edit window ==========
+    mult_a1.value =''
+    mult_a2.value = ''
+    mult_a3.value = ''
+    mult_a4.value = ''
+    mult_right_ans.value = ''
 }
 //============= // edit gui=========================
-
 
 
 
 // ================ q and a generator =======================
 let getAllInputs = () => {
     
-    let q = docmunent.getElementById('question-input');
+    let q = document.getElementById('question-input').value;
     let a1
     let a2 
     let a3 
@@ -158,22 +241,31 @@ let getAllInputs = () => {
     let f = 'False'
     let torf_correct_ans
     if(choice_selection == 'multiple'){
-        a1 = document.getElementById('a')
-        a2 = document.getElementById('a2')
-        a3 = document.getElementById('a3')
-        a4 = document.getElementById('a4')
-        mult_correct_ans = document.getElementById('mult-correct-ans')
+        a1 = document.getElementById('a1').value
+        a2 = document.getElementById('a2').value
+        a3 = document.getElementById('a3').value
+        a4 = document.getElementById('a4').value
+        mult_correct_ans = document.getElementById('mult-correct-ans').value
 
-        add_Q_and_A.push([q, a1, a2, a3, a4, mult_correct_ans])
+        q_and_a.push([q, a1, a2, a3, a4, mult_correct_ans])
     }
     if(choice_selection == 't-or-f'){
-        add_Q_and_A.push([q, 'True', 'False', mult_correct_ans])
-    }
+        if(document.getElementById('ans-true').checked){
+            q_and_a.push([q, 'True', 'False', 'True'])
+        } 
+        if(document.getElementById('ans-false').checked){
+            q_and_a.push([q, 'True', 'False', 'True'])
+        }
 
+        
+    }
+    console.log(q_and_a)
 }
 
 let show_Q_and_A = () => {
-    addQuestion()
+    getAllInputs()
+    addQuestionAndChoices()
+
 }
 
 // ================= //q and a generator =======================
