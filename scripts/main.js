@@ -223,7 +223,14 @@ let show_Q_and_A = () => {
 
 cancel_edit_btn.addEventListener('click', () => {edit_gui.style.display = "none"})
 add_btn.addEventListener('click', () => {show_Q_and_A()})
-
+document.getElementById('create-quiz').addEventListener('click', ()=>{
+    document.getElementById('main-container').style.display = 'block'
+    document.getElementById('home').style.display = 'none'
+})
+document.getElementById('quiz-maker-header').addEventListener('click', ()=>{
+    document.getElementById('main-container').style.display = 'none'
+    document.getElementById('home').style.display = 'block'
+})
 
 // enter keypress question input
 //question_input.addEventListener('keypress', (e)=>{if(e.key == 'Enter'){addQuestion();}})

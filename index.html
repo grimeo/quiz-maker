@@ -10,22 +10,30 @@
 <body>
 
     <div id="edit-gui">
-        <h2>edit</h2>
+        <h2 id="edit-header">Edit Quiz Details</h2>
         <textarea id="edit-textarea"></textarea>
         <input type="text" name="" id="edit-a1"/>
         <input type="text" name="" id="edit-a2"/>
         <input type="text" name="" id="edit-a3"/>
         <input type="text" name="" id="edit-a4"/>
 
-        <label for="mult-correct-ans">Correct Answer: </label>
-        <input type="text" name="correct-answer" id="edit-mult-correct-ans">
-
-        <button id="cancel-edit-btn">Cancel</button>
+        <input type="text" name="correct-answer" id="edit-mult-correct-ans" placeholder="Correct Answer">
+        
         <button id="save-edit-btn">Save</button>
+        <button id="cancel-edit-btn">Cancel</button>
         <span id="question-to-edit-id"></span>
     </div>
+    <div id="home">
+        <h1 class="head1"style="font-size:100px;">Quiz Maker</h1>
+        <nav class="navMenu">
+            <a href="#" id="create-quiz">Create</a>
+            <a href="https://grimeo.github.io/CheeseQuiz/">Quiz</a>
+            <a href="https://grimeo.github.io/twelve/">Twelve</a>
+            <div class="dot"></div>
+        </nav>
+    </div>
     <div id="main-container">
-        <h1>Quiz Maker</h1>
+        <h1 id="quiz-maker-header">Quiz Maker</h1>
         <div class="quiz-generator-container">
         </div>
         <p id='err-question-input'></p>
