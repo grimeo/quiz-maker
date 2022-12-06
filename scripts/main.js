@@ -221,6 +221,19 @@ let show_Q_and_A = () => {
 
 // ================= //q and a generator =======================
 
+// ================= real quizyy ============================
+let compileQuiz = () => {
+    // c = compile
+    // q = question
+    // qs = questions
+    // cont = container
+    let c_qs_cont = document.getElementById('quiz-compiler');
+    let c_q_Item_cont_ = document.createElement('div');
+    let q = document.createElement('p');
+    
+}
+
+
 cancel_edit_btn.addEventListener('click', () => {edit_gui.style.display = "none"})
 add_btn.addEventListener('click', () => {show_Q_and_A()})
 document.getElementById('create-quiz').addEventListener('click', ()=>{
