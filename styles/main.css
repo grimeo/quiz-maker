@@ -124,9 +124,9 @@ body {
 #question-input{
     display: block;
     font-size: 18px;
-    background-color: transparent;
-    color: whitesmoke;
-    outline: none;
+    background-color: #ffffffbe;
+    color: #1b1b1b;
+    /* outline: none; */
     caret-color: green;
     width: 750px;
     height: 180px;
@@ -281,24 +281,26 @@ body {
     font-size: 18px;
     padding: 5px 20px;
     outline: none;
-    border: 1px solid #165794;
+    border: none;
     border-radius: 5px;
     margin-bottom: 20px;
 }
 
 .edit-btn{
-    margin-left: 320px;
+    margin-left: 310px;
+    color: white;
     background-color: #2384df;
 }
 .edit-btn:hover{
-    margin-left: 320px;
-    background-color: #60a3e2;
+    background-color: #1d5b96;
 }
 .del-btn{
-    background-color: #df2323;
+    margin-left: 30px;
+    color: white;
+    background-color: #d83232;
 }
 .del-btn:hover{
-    background-color: #dd7575;
+    background-color: #921f1f;
 }
 
 #add-btn{
@@ -330,8 +332,8 @@ body {
             width: 95%;
             height: 100px;
             padding: 20px;
-            color: #fcfafa;
-            background-color: transparent;
+            color: #1b1b1b;
+            background-color: rgba(245, 245, 245, 0.781);
             border: 1px solid whitesmoke;
             border-radius: 10px;
             margin: 20px auto
@@ -354,3 +356,45 @@ body {
         border-radius: 10px;;
         border: 1px solid whitesmoke;
 }
+#preview-btn{
+    width: 100px;
+    height: auto;
+    color: white;
+    background-color: #a5a5a5;
+    display: block;
+    cursor: pointer;
+    text-align: center;
+    margin: auto;
+    border: 1px solid greenyellow;
+    font-size: 20px;
+}
+
+#quiz-compiler{
+    display: none;
+    width: 940px;
+    height: 3000px;
+    margin: auto;
+    border: 1px solid red;
+}
+    .compiled-q-cont{
+        margin-top: 20px;
+        width: 90%;
+        height: 200px;
+        margin: auto;
+        border: 1px solid green;
+        display: block;
+        margin-bottom: 30px;
+    }
+        .compiled-q{
+            padding: 20px;  
+            border: 1px solid red;
+            font-size: 20px;;
+        }
+        .compiled-choices{
+            width: 200px;
+            height:70px;
+             padding: 30px;
+            border: 1px solid white;
+            display: inline-block;
+        }
+        

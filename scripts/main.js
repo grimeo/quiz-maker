@@ -227,10 +227,60 @@ let compileQuiz = () => {
     // q = question
     // qs = questions
     // cont = container
-    let c_qs_cont = document.getElementById('quiz-compiler');
-    let c_q_Item_cont_ = document.createElement('div');
-    let q = document.createElement('p');
     
+    for(let i = 0; i<q_and_a.length; i++){
+        if(q_and_a.length == 0 || q_and_a[i] == ''){
+            // do nothing
+        } else {
+            let c_qs_cont = document.getElementById('quiz-compiler');
+
+            let c_q_Item_cont_ = document.createElement('div');
+            let q = document.createElement('p');
+
+            let c1 = document.createElement('a')
+            let c2 = document.createElement('a')
+            let c3 = document.createElement('a')
+            let c4 = document.createElement('a')
+
+            c_q_Item_cont_.setAttribute('class', 'compiled-q-cont')
+            c_q_Item_cont_.setAttribute('id', 'compiled-q-cont-'+(i+1))
+            c_qs_cont.appendChild(c_q_Item_cont_)
+
+            q.setAttribute('class', 'compiled-q')
+            q.setAttribute('id','compiled-q-'+(i+1))
+            c_q_Item_cont_.appendChild(q)
+
+            c1.setAttribute('class', 'compiled-choices')
+            c1.setAttribute('id', 'c-'+(i+1)+'-1')
+            c_q_Item_cont_.appendChild(c1)
+
+            c2.setAttribute('class', 'compiled-choices')
+            c2.setAttribute('id', 'c-'+(i+1)+'-2')
+            c_q_Item_cont_.appendChild(c2)
+
+            c3.setAttribute('class', 'compiled-choices')
+            c3.setAttribute('id', 'c-'+(i+1)+'-3')
+            c_q_Item_cont_.appendChild(c3)
+
+            c4.setAttribute('class', 'compiled-choices')
+            c4.setAttribute('id', 'c-'+(i+1)+'-4')
+            c_q_Item_cont_.appendChild(c4)
+
+            q.innerHTML = q_and_a[i][0];
+            c1.innerHTML = q_and_a[i][1]
+            c2.innerHTML = q_and_a[i][2]
+            c3.innerHTML = q_and_a[i][3]
+            c4.innerHTML = q_and_a[i][4]
+
+        }
+
+        document.getElementById('main-container').style.display = 'none';
+        document.getElementById('quiz-compiler').style.display = 'block'
+    }
+    
+
+
+    console.log('end')
 }
 
 
@@ -244,6 +294,7 @@ document.getElementById('quiz-maker-header').addEventListener('click', ()=>{
     document.getElementById('main-container').style.display = 'none'
     document.getElementById('home').style.display = 'block'
 })
+document.getElementById('preview-btn').addEventListener('click', ()=>{compileQuiz()})
 
 // enter keypress question input
 //question_input.addEventListener('keypress', (e)=>{if(e.key == 'Enter'){addQuestion();}})
