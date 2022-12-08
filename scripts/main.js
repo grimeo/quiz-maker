@@ -8,9 +8,17 @@ const question_container = document.getElementById('question-container');
 const question_input = document.getElementById('question-input');
 const add_btn = document.getElementById('add-btn');
 
+const c_qs_cont = document.getElementById('quiz-compiler');
+
+const quiz_err = document.getElementById('quiz-err')
+
 let number_of_question = 0;
 
 var q_and_a = []
+var user_ans = []
+var new_correct_answers = [] //removes deleted questions
+var score = 0
+let isCheck;
 
 let addQuestionAndChoices = () => {
     let questions_container = document.getElementById('questions-container');
@@ -102,7 +110,8 @@ let addQuestionAndChoices = () => {
         document.getElementById('mult-correct-ans').value = ''
 
 // ============= /clear() ================
-err_question_input.style.display = 'none'
+    err_question_input.style.display = 'none'
+    show_preview_btn()
     }
 }   
 
@@ -142,7 +151,15 @@ let editQuestion = (n) => {
 
 let deleteQuestion = (n) => {
     let question = document.getElementById('question-container-'+ n);
+    
+    let mult_a1 = document.getElementById('edit-a1')
+    let mult_a2 = document.getElementById('edit-a2')
+    let mult_a3 = document.getElementById('edit-a3')
+    let mult_a4 = document.getElementById('edit-a4')
+    let mult_right_ans = document.getElementById('edit-mult-correct-ans')
+
     question.remove();
+
     edit_gui.style.display = "none"
 
     // ========== clearing operation sa edit window ==========
@@ -152,6 +169,7 @@ let deleteQuestion = (n) => {
     mult_a3.value = ''
     mult_a4.value = ''
     mult_right_ans.value = ''
+    show_preview_btn()
 }
 
 let saveEditedQuestion = () => {
@@ -218,10 +236,16 @@ let getAllInputs = () => {
 let show_Q_and_A = () => {
     addQuestionAndChoices()
 }
-
 // ================= //q and a generator =======================
 
-// ================= real quizyy ============================
+let show_preview_btn = () => {
+    if(q_and_a.length == 0){
+        document.getElementById('preview-btn').style.display = 'none'
+    } else {
+        document.getElementById('preview-btn').style.display = 'block'
+    }
+}
+
 let compileQuiz = () => {
     // c = compile
     // q = question
@@ -229,18 +253,19 @@ let compileQuiz = () => {
     // cont = container
     
     for(let i = 0; i<q_and_a.length; i++){
-        if(q_and_a.length == 0 || q_and_a[i] == ''){
+
+        user_ans.push('')
+
+        if(q_and_a.length == 0 || q_and_a[i] == 'deleted'){
             // do nothing
         } else {
-            let c_qs_cont = document.getElementById('quiz-compiler');
 
             let c_q_Item_cont_ = document.createElement('div');
             let q = document.createElement('p');
-
-            let c1 = document.createElement('a')
-            let c2 = document.createElement('a')
-            let c3 = document.createElement('a')
-            let c4 = document.createElement('a')
+            let c1 = document.createElement('button')
+            let c2 = document.createElement('button')
+            let c3 = document.createElement('button')
+            let c4 = document.createElement('button')
 
             c_q_Item_cont_.setAttribute('class', 'compiled-q-cont')
             c_q_Item_cont_.setAttribute('id', 'compiled-q-cont-'+(i+1))
@@ -251,38 +276,100 @@ let compileQuiz = () => {
             c_q_Item_cont_.appendChild(q)
 
             c1.setAttribute('class', 'compiled-choices')
-            c1.setAttribute('id', 'c-'+(i+1)+'-1')
+            c1.setAttribute('id', 'c-1-'+(i+1)+'')
+            c1.setAttribute('onclick', "setUserAnswers(returnIndexId(this.id), document.getElementById(returnId(this.id)).innerHTML, 1)")
             c_q_Item_cont_.appendChild(c1)
 
             c2.setAttribute('class', 'compiled-choices')
-            c2.setAttribute('id', 'c-'+(i+1)+'-2')
+            c2.setAttribute('id', 'c-2-'+(i+1)+'')
+            c2.setAttribute('onclick', "setUserAnswers(returnIndexId(this.id), document.getElementById(returnId(this.id)).innerHTML, 2)")
             c_q_Item_cont_.appendChild(c2)
 
             c3.setAttribute('class', 'compiled-choices')
-            c3.setAttribute('id', 'c-'+(i+1)+'-3')
+            c3.setAttribute('id', 'c-3-'+(i+1)+'')
+            c3.setAttribute('onclick', 'setUserAnswers(returnIndexId(this.id), document.getElementById(returnId(this.id)).innerHTML, 3)')
             c_q_Item_cont_.appendChild(c3)
 
             c4.setAttribute('class', 'compiled-choices')
-            c4.setAttribute('id', 'c-'+(i+1)+'-4')
+            c4.setAttribute('id', 'c-4-'+(i+1)+'')
+            c4.setAttribute('onclick', "setUserAnswers(returnIndexId(this.id), document.getElementById(returnId(this.id)).innerHTML, 4)")
             c_q_Item_cont_.appendChild(c4)
 
-            q.innerHTML = q_and_a[i][0];
+            q.innerHTML = q_and_a[i][0]
             c1.innerHTML = q_and_a[i][1]
             c2.innerHTML = q_and_a[i][2]
             c3.innerHTML = q_and_a[i][3]
             c4.innerHTML = q_and_a[i][4]
-
         }
-
         document.getElementById('main-container').style.display = 'none';
         document.getElementById('quiz-compiler').style.display = 'block'
     }
+        let submit_btn = document.createElement('button')
+        submit_btn.setAttribute('id', 'submit-btn')
+        submit_btn.setAttribute('onclick', 'submitQuiz()')
+        submit_btn.innerHTML = 'Submit'
+
+        document.getElementById('quiz-compiler').appendChild(submit_btn)
     
-
-
-    console.log('end')
 }
 
+let returnIndexId = indexId => {
+    let [,,,, ...index] = indexId
+    return index
+}
+
+let returnId = id => {
+    return id
+}
+
+// setUserAnswers(returnIndexId(this.id), document.getElementById(returnId(this.id)).innerHTML, 1)
+let setUserAnswers = (index, value, btnNumber) => {
+    user_ans[index-1] = value
+    
+    for(let i = 1; i <= 4; i++){
+        if(i != btnNumber){
+            document.getElementById('c-'+ i +'-'+ index).style.backgroundColor = 'white'
+        } else {
+            document.getElementById('c-'+ i +'-'+ index).style.backgroundColor = 'green'
+        }
+    }
+}
+
+let submitQuiz = () => {
+
+    let submit_msg = document.getElementById('submit-quiz-message')
+
+    submit_msg.innerHTML = ''
+
+    for(let i = 0; i < user_ans.length; i++){
+        if(user_ans[i] == ''){
+            submit_msg.innerHTML = 'Looks like you left something without an answer. Are you sure you want to submit the quiz?'
+        } 
+        else {
+            submit_msg.innerHTML = 'Are you sure you want to submit your quiz?'
+        }
+    }
+
+    document.getElementById('submit-notice').style.display = 'block'
+    
+}
+
+let checkAnswers = () => {
+    let score_p = document.getElementById('score');
+    score_p.innerHTML = ''
+    score=0
+    for(let i =0; i<  q_and_a.length; i++){
+        if(q_and_a[i][5] == user_ans[i]){
+            score += 1;
+        }
+    }
+    console.log(score)
+    score_p.innerHTML = score
+    document.getElementById('overscore').innerHTML = q_and_a.length
+    document.getElementById('quiz-compiler').style.display = 'none'
+    document.getElementById('submit-notice').style.display = 'none'
+    document.getElementById('score-panel').style.display = 'block'
+}
 
 cancel_edit_btn.addEventListener('click', () => {edit_gui.style.display = "none"})
 add_btn.addEventListener('click', () => {show_Q_and_A()})
@@ -295,6 +382,19 @@ document.getElementById('quiz-maker-header').addEventListener('click', ()=>{
     document.getElementById('home').style.display = 'block'
 })
 document.getElementById('preview-btn').addEventListener('click', ()=>{compileQuiz()})
+document.getElementById('cancel-submit-quiz').addEventListener('click', ()=>{
+    document.getElementById('submit-notice').style.display = 'none'
+    }
+)
+document.getElementById('submit-quiz-btn').addEventListener('click', ()=>{checkAnswers()})
+document.getElementById('restart-btn').addEventListener('click', ()=>{
+    document.getElementById('submit-notice').style.display = 'none'
+    document.getElementById('score-panel').style.display = 'none'
 
+    document.getElementById('quiz-compiler').replaceChildren();
+    compileQuiz()
+
+})
+document.getElementById('menu-btn').addEventListener('click', ()=>{location.reload()})
 // enter keypress question input
 //question_input.addEventListener('keypress', (e)=>{if(e.key == 'Enter'){addQuestion();}})

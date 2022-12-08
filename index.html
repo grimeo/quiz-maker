@@ -23,6 +23,7 @@
         <button id="cancel-edit-btn">Cancel</button>
         <span id="question-to-edit-id"></span>
     </div>
+
     <div id="home">
         <h1 class="head1"style="font-size:100px;">Quiz Maker</h1>
         <nav class="navMenu">
@@ -32,16 +33,14 @@
             <div class="dot"></div>
         </nav>
     </div>
+
     <div id="main-container">
         <h1 id="quiz-maker-header">Quiz Maker</h1>
         <div class="quiz-generator-container">
         </div>
         <p id='err-question-input'></p>
-
         <textarea id="question-input" ></textarea>
-        
         <div id="choice-container">
-
             <h2 id="choices-header">Choices</h2>
 
             <div id="multiple-choice-container">
@@ -50,22 +49,35 @@
                 <input type="text" name="" class="input-answer" id="a3"/>
                 <input type="text" name="" class="input-answer" id="a4"/>
                 <br>
-                
                 <input type="text" name="correct-answer" class="" id="mult-correct-ans" placeholder="Correct Answer">
             </div>
         </div>
         <button id="add-btn">Add Question</button>
-        <a id="preview-btn">Preview</a>
+        <a id="preview-btn">Take quiz</a>
         <div id="questions-container">
         </div>
     </div>
 
-    <div id="quiz-compiler">
-        
-
+    <div id="submit-notice">
+        <h2>Submit your quiz?</h2>
+        <p id="submit-quiz-message">Are you sure you want to be a billionaire?</p>
+        <button id="submit-quiz-btn">Submit</button>
+        <button id="cancel-submit-quiz">Cancel</button>
     </div>
     
+    <div id="quiz-compiler">
+        
+    </div>
+        
+
+    <div id="score-panel">
+        <h2>Congratulations!</h2>
+        <p id="score-p">Your score: <span id="score"></span>/ <span id="overscore"></span></p>
+        <p id="retake-p">Do you want to retake the quiz?</p>
+        <button id="restart-btn" >Try again!</button>
+        <button id="menu-btn">Main Menu</button>
+    </div>
     
-    <script src="scripts/main.js" defer></script>
+    <script src="scripts/main.js"></script>
 </body>
 </html>

@@ -135,6 +135,7 @@ body {
     padding: 20px;
     margin: auto
 }
+
 #choices-header{
     text-align: center;
     padding: 20px;
@@ -357,29 +358,35 @@ body {
         border: 1px solid whitesmoke;
 }
 #preview-btn{
-    width: 100px;
+    display: none;
+    width: 120px;
     height: auto;
     color: white;
-    background-color: #a5a5a5;
-    display: block;
+    background-color: #369b8d;
     cursor: pointer;
     text-align: center;
+    border-radius: 10px;
     margin: auto;
-    border: 1px solid greenyellow;
+    padding: 10px;
+    border: none;
     font-size: 20px;
 }
 
 #quiz-compiler{
     display: none;
+    position: relative;
     width: 940px;
     height: 3000px;
     margin: auto;
     border: 1px solid red;
+    animation: compile-question .2s linear forwards;
 }
+    @keyframes compile-question {0%{opacity: .4} 100%{opacity: 1}}
+
     .compiled-q-cont{
         margin-top: 20px;
         width: 90%;
-        height: 200px;
+        height: auto;
         margin: auto;
         border: 1px solid green;
         display: block;
@@ -388,13 +395,138 @@ body {
         .compiled-q{
             padding: 20px;  
             border: 1px solid red;
-            font-size: 20px;;
+            font-size: 20px;
         }
         .compiled-choices{
-            width: 200px;
-            height:70px;
-             padding: 30px;
-            border: 1px solid white;
             display: inline-block;
+            vertical-align: top;
+            cursor: pointer;
+            text-align: center;
+            width: 400px;   
+            font-size: 18px;
+            padding: 10px;
+            border: 1px solid white;
+            margin: 10px;
+            border: 1px solid whitesmoke;
+            border-radius: 50px;
         }
+
+        #submit-btn{
+            display: block;
+            width:90%;
+            border: none;
+            border-radius: 20px;
+            margin: 0 auto;
+            color: black;
+            font-size: 22px;
+            background: #19f519;
+            padding: 10px;
+        }
+
+#submit-notice {
+    display: none;
+    position: fixed;
+    width: 600px;
+    color: #1b1b1b;
+    z-index: 10;
+    height: 220px;
+    border-radius: 20px;;
+    background-color: #f6f4e6;
+    border: none;
+    overflow: hidden;
+    -ms-transform: translate3d(calc(calc(100vw - 600px) / 2),
+        calc(calc(100vh - 220px) / 2),
+        0);
+    transform: translate3d(calc(calc(100vw - 600px) / 2),
+        calc(calc(100vh - 220px) / 2),
+        0);
+}
+    #submit-notice h2{
+        text-align: center;
+        background-color: #1b1b1b;
+        color: whitesmoke;
+        padding: 20px;
+    }
+    #submit-notice p{
+        padding: 20px;
+    }
+    #cancel-submit-quiz,#submit-quiz-btn{
+        display:inline-block;
+        vertical-align: top;
+        border-radius: 5px;
         
+
+    }
+    #cancel-submit-quiz{
+        width: 100px;
+        padding: 5px;
+        font-size: 17px;
+        margin-left: 15px;
+        background-color: #c9c8c8;
+        border:  none;
+    }
+
+    #cancel-submit-quiz:hover {
+        background-color: #b3b2b2;
+    }
+    #submit-quiz-btn{
+        width: 100px;
+        padding: 5px;
+        font-size: 17px;
+        margin-left: 350px;
+        border: none;
+        background-color: #5fe250;
+    }
+    #submit-quiz-btn:hover{
+        background-color: #43ce33
+    }
+
+#score-panel {
+    position: fixed;
+    display: none;
+    z-index: 10;
+    width: 500px;
+    height: 230px;
+    color: #1b1b1b;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    border: none;
+    overflow: hidden;
+    transform: translate3d(calc(calc(100vw - 500px) / 2),
+        calc(calc(100vh - 230px) / 2),
+        0);
+}
+    #score-panel h2{
+        text-align: center;
+        font-size: 40px;
+        background-color: #1b1b1b;
+        color: whitesmoke;
+    }
+    #score-p{
+        padding: 10px 20px;
+        font-size: 20px;
+    }
+    #retake-p{
+        padding: 20px;
+        font-size: 18px;
+    }
+    #restart-btn, #menu-btn{
+        display: inline-block;
+        vertical-align: top;
+        border: none;
+        border-radius: 3px;
+    }
+    #restart-btn{
+        width: 120px;
+        padding: 5px;
+        margin-left: 230px;
+        background-color: #19f519;
+        font-size: 18px;
+    }
+    #menu-btn{
+        background-color: #bebebe;
+        width: 120px;
+        margin-left: 10px;
+        padding: 5px;
+        font-size: 18px;
+    }
