@@ -253,7 +253,7 @@ let compileQuiz = () => {
     // cont = container
     
     for(let i = 0; i<q_and_a.length; i++){
-
+        user_ans = []
         user_ans.push('')
 
         if(q_and_a.length == 0 || q_and_a[i] == 'deleted'){
