@@ -261,6 +261,7 @@ let compileQuiz = () => {
         } else {
 
             let c_q_Item_cont_ = document.createElement('div');
+            let q_cont = document.createElement('div')
             let q = document.createElement('p');
             let c1 = document.createElement('button')
             let c2 = document.createElement('button')
@@ -271,9 +272,12 @@ let compileQuiz = () => {
             c_q_Item_cont_.setAttribute('id', 'compiled-q-cont-'+(i+1))
             c_qs_cont.appendChild(c_q_Item_cont_)
 
-            q.setAttribute('class', 'compiled-q')
-            q.setAttribute('id','compiled-q-'+(i+1))
-            c_q_Item_cont_.appendChild(q)
+            q_cont.setAttribute('class', 'q-cont')
+            q_cont.setAttribute('id','compiled-q-'+(i+1))
+            c_q_Item_cont_.appendChild(q_cont)
+
+            q.setAttribute('class', 'q')
+            q_cont.appendChild(q)
 
             c1.setAttribute('class', 'compiled-choices')
             c1.setAttribute('id', 'c-1-'+(i+1)+'')
@@ -330,7 +334,7 @@ let setUserAnswers = (index, value, btnNumber) => {
         if(i != btnNumber){
             document.getElementById('c-'+ i +'-'+ index).style.backgroundColor = 'white'
         } else {
-            document.getElementById('c-'+ i +'-'+ index).style.backgroundColor = 'green'
+            document.getElementById('c-'+ i +'-'+ index).style.backgroundColor = '#19f519'
         }
     }
 }

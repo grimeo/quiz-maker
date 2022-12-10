@@ -376,9 +376,8 @@ body {
     display: none;
     position: relative;
     width: 940px;
-    height: 3000px;
+    height: auto;
     margin: auto;
-    border: 1px solid red;
     animation: compile-question .2s linear forwards;
 }
     @keyframes compile-question {0%{opacity: .4} 100%{opacity: 1}}
@@ -386,28 +385,41 @@ body {
     .compiled-q-cont{
         margin-top: 20px;
         width: 90%;
-        height: auto;
+        height: auto;   
         margin: auto;
-        border: 1px solid green;
+        border-radius: 15px;
+        border: 3px solid whitesmoke;
+        background-color: #788585;
+        padding:0 0 20px 0 ;
         display: block;
-        margin-bottom: 30px;
+        margin-top: 40px;
+        overflow: hidden;
     }
-        .compiled-q{
-            padding: 20px;  
-            border: 1px solid red;
-            font-size: 20px;
+        .q-cont{
+            width: 100%;
+            margin: 0 auto;
+            border-radius: 15px;
+            background-color: #333333;
+            padding: 20px; 
         }
+            .q{
+                padding: 20px;  
+                background-color: whitesmoke;
+                color: #1b1b1b;
+                border-radius: 10px;
+                font-size: 20px;
+            }
         .compiled-choices{
             display: inline-block;
             vertical-align: top;
             cursor: pointer;
             text-align: center;
-            width: 400px;   
+            width: 340px;   
+            border: none;
+            outline: none;
             font-size: 18px;
             padding: 10px;
-            border: 1px solid white;
-            margin: 10px;
-            border: 1px solid whitesmoke;
+            margin: 10px 40px;
             border-radius: 50px;
         }
 
@@ -415,8 +427,8 @@ body {
             display: block;
             width:90%;
             border: none;
-            border-radius: 20px;
-            margin: 0 auto;
+            border-radius: 10px;
+            margin: 40px auto;
             color: black;
             font-size: 22px;
             background: #19f519;
@@ -455,7 +467,6 @@ body {
         vertical-align: top;
         border-radius: 5px;
         
-
     }
     #cancel-submit-quiz{
         width: 100px;
